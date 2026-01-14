@@ -243,6 +243,48 @@ OpenCode从以下位置加载MCP配置（按优先级顺序）：
 }
 ```
 
+### Codex
+
+#### 配置文件位置
+
+Codex 从以下位置加载 MCP 配置：
+
+1. **全局配置**：`~/.config/codex/config.toml`
+2. **项目配置**：项目根目录下的 `codex.toml`
+
+#### 配置格式
+
+```toml
+[mcp_servers.image_yunwu]
+command = "npx"
+args = ["-y", "@genoooool/mcp-image-generator"]
+
+[mcp_servers.image_yunwu.env]
+IMAGE_PROVIDER = "yunwu"
+IMAGE_TOKEN = "你的_token"
+IMAGE_OUT_DIR = "./images"
+
+[mcp_servers.image_gemini]
+command = "npx"
+args = ["-y", "@genoooool/mcp-image-generator"]
+
+[mcp_servers.image_gemini.env]
+IMAGE_PROVIDER = "gemini_official"
+IMAGE_API_KEY = "你的_gemini_api_key"
+IMAGE_OUT_DIR = "./images"
+
+[mcp_servers.image_custom]
+command = "npx"
+args = ["-y", "@genoooool/mcp-image-generator"]
+
+[mcp_servers.image_custom.env]
+IMAGE_PROVIDER = "custom_gemini"
+IMAGE_BASE_URL = "https://your-custom-provider.com"
+IMAGE_API_KEY = "你的_api_key"
+IMAGE_AUTH_TYPE = "apikey"
+IMAGE_OUT_DIR = "./images"
+```
+
 ## 工具使用
 
 ### `generate_image`

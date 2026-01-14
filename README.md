@@ -243,6 +243,48 @@ OpenCode loads MCP configuration from the following locations (in order of prece
 }
 ```
 
+### Codex
+
+#### Configuration File Location
+
+Codex loads MCP configuration from the following locations:
+
+1. **Global config**: `~/.config/codex/config.toml`
+2. **Project config**: `codex.toml` in project root
+
+#### Configuration Format
+
+```toml
+[mcp_servers.image_yunwu]
+command = "npx"
+args = ["-y", "@genoooool/mcp-image-generator"]
+
+[mcp_servers.image_yunwu.env]
+IMAGE_PROVIDER = "yunwu"
+IMAGE_TOKEN = "your_token"
+IMAGE_OUT_DIR = "./images"
+
+[mcp_servers.image_gemini]
+command = "npx"
+args = ["-y", "@genoooool/mcp-image-generator"]
+
+[mcp_servers.image_gemini.env]
+IMAGE_PROVIDER = "gemini_official"
+IMAGE_API_KEY = "your_gemini_api_key"
+IMAGE_OUT_DIR = "./images"
+
+[mcp_servers.image_custom]
+command = "npx"
+args = ["-y", "@genoooool/mcp-image-generator"]
+
+[mcp_servers.image_custom.env]
+IMAGE_PROVIDER = "custom_gemini"
+IMAGE_BASE_URL = "https://your-custom-provider.com"
+IMAGE_API_KEY = "your_api_key"
+IMAGE_AUTH_TYPE = "apikey"
+IMAGE_OUT_DIR = "./images"
+```
+
 ## Tool Usage
 
 ### `generate_image`
