@@ -60,6 +60,7 @@ coverage/
 # Temporary files
 计划.txt
 云雾api文档.md
+npm发布.md
 *.tmp
 *.temp
 

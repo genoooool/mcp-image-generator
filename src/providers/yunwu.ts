@@ -49,9 +49,6 @@ export class YunwuProvider implements ImageProvider {
 
       const data = response.data;
 
-      // Log raw response for debugging
-      console.error('[DEBUG] Yunwu API Raw Response:', JSON.stringify(data, null, 2));
-
       // Check for response with image URL
       if (data.candidates?.[0]?.content?.parts?.[0]?.inlineData?.data) {
         // Base64 encoded image

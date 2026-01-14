@@ -1,5 +1,5 @@
 {
-  "name": "mcp-image-generator",
+  "name": "@genoooool/mcp-image-generator",
   "version": "1.0.0",
   "description": "MCP Server for image generation with multi-provider support (Yunwu, Gemini Official, Custom)",
   "type": "module",
@@ -26,16 +26,16 @@
     "image",
     "generator"
   ],
-  "author": "",
+  "author": "genoooool",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yourusername/mcp-image-generator.git"
+    "url": "git+https://github.com/genoooool/mcp-image-generator.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/mcp-image-generator/issues"
+    "url": "https://github.com/genoooool/mcp-image-generator/issues"
   },
-  "homepage": "https://github.com/yourusername/mcp-image-generator#readme",
+  "homepage": "https://github.com/genoooool/mcp-image-generator#readme",
   "engines": {
     "node": ">=18.0.0"
   },

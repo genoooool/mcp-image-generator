@@ -1,6 +1,6 @@
-# MCP Image Generator
+# @genoooool/mcp-image-generator
 
-An MCP (Model Context Protocol) server for AI image generation with multi-provider support.
+**This is an MCP (Model Context Protocol) server** for AI image generation with multi-provider support.
 
 ## Features
 
@@ -12,13 +12,32 @@ An MCP (Model Context Protocol) server for AI image generation with multi-provid
 - **Error handling**: Comprehensive error messages with HTTP status codes and response details
 - **Timeout support**: Configurable request timeout (default: 60s)
 
+## Supported MCP Clients
+
+This MCP server works with:
+- **Claude Code** (Claude Desktop)
+- **OpenCode**
+- Any MCP-compatible client
+
 ## Installation
 
-### Local Installation
+### Option 1: NPX (Recommended - No installation required)
+
+```bash
+npx -y @genoooool/mcp-image-generator
+```
+
+### Option 2: Global Install
+
+```bash
+npm install -g @genoooool/mcp-image-generator
+```
+
+### Option 3: Local Install
 
 ```bash
 # Clone or download the repository
-cd F:\generate_image
+cd /path/to/project
 
 # Install dependencies
 npm install
@@ -79,9 +98,114 @@ export IMAGE_AUTH_TYPE=apikey  # Optional: 'bearer' or 'apikey'
 export IMAGE_OUT_DIR=./images  # Optional
 ```
 
-## OpenCode MCP Configuration
+## MCP Client Configuration
 
-### Configuration File Location
+### Claude Code (Claude Desktop)
+
+#### Configuration File Location
+
+Claude Code loads MCP configuration from:
+- **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
+- **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+- **Linux**: `~/.config/Claude/claude_desktop_config.json`
+
+#### Configuration Format
+
+Add the MCP server to your configuration file:
+
+```jsonc
+{
+  "mcpServers": {
+    "image-generator-yunwu": {
+      "command": "npx",
+      "args": ["-y", "@genoooool/mcp-image-generator"],
+      "env": {
+        "IMAGE_PROVIDER": "yunwu",
+        "IMAGE_TOKEN": "your_yunwu_token",
+        "IMAGE_OUT_DIR": "./images"
+      }
+    },
+    "image-generator-gemini": {
+      "command": "npx",
+      "args": ["-y", "@genoooool/mcp-image-generator"],
+      "env": {
+        "IMAGE_PROVIDER": "gemini_official",
+        "IMAGE_API_KEY": "your_gemini_api_key",
+        "IMAGE_OUT_DIR": "./images"
+      }
+    },
+    "image-generator-custom": {
+      "command": "npx",
+      "args": ["-y", "@genoooool/mcp-image-generator"],
+      "env": {
+        "IMAGE_PROVIDER": "custom_gemini",
+        "IMAGE_BASE_URL": "https://your-custom-provider.com",
+        "IMAGE_API_KEY": "your_api_key",
+        "IMAGE_AUTH_TYPE": "apikey",
+        "IMAGE_OUT_DIR": "./images"
+      }
+    }
+  }
+}
+```
+
+#### Using Global Installation
+
+If you installed globally:
+
+```jsonc
+{
+  "mcpServers": {
+    "image-generator": {
+      "command": "mcp-image-generator",
+      "env": {
+        "IMAGE_PROVIDER": "yunwu",
+        "IMAGE_TOKEN": "your_token"
+      }
+    }
+  }
+}
+```
+
+#### Using Local Installation
+
+If you cloned the repository:
+
+**Windows**:
+```jsonc
+{
+  "mcpServers": {
+    "image-generator": {
+      "command": "node",
+      "args": ["C:\\path\\to\\project\\dist\\index.js"],
+      "env": {
+        "IMAGE_PROVIDER": "yunwu",
+        "IMAGE_TOKEN": "your_token"
+      }
+    }
+  }
+}
+```
+
+**macOS/Linux**:
+```jsonc
+{
+  "mcpServers": {
+    "image-generator": {
+      "command": "node",
+      "args": ["/path/to/project/dist/index.js"],
+      "env": {
+        "IMAGE_PROVIDER": "yunwu",
+        "IMAGE_TOKEN": "your_token"
+      }
+    }
+  }
+}
+```
+
+### OpenCode
+
+#### Configuration File Location
 
 OpenCode loads MCP configuration from the following locations (in order of precedence):
 
@@ -89,11 +213,7 @@ OpenCode loads MCP configuration from the following locations (in order of prece
 2. **Custom config**: `OPENCODE_CONFIG` environment variable
 3. **Project config**: `opencode.json` in project root
 
-For detailed information on configuration locations and precedence, see the [OpenCode Config documentation](https://opencode.ai/docs/config/).
-
-### Configuration Format
-
-Add the MCP server to your `opencode.json` file under the `mcp` section:
+#### Configuration Format
 
 ```jsonc
 {
@@ -101,90 +221,27 @@ Add the MCP server to your `opencode.json` file under the `mcp` section:
   "mcp": {
     "image-generator-yunwu": {
       "type": "local",
-      "command": ["node", "F:\\generate_image\\dist\\index.js"],
+      "command": ["npx", "-y", "@genoooool/mcp-image-generator"],
       "enabled": true,
       "environment": {
         "IMAGE_PROVIDER": "yunwu",
         "IMAGE_TOKEN": "your_yunwu_token",
-        "IMAGE_OUT_DIR": "F:\\images"
+        "IMAGE_OUT_DIR": "./images"
       }
     },
     "image-generator-gemini": {
       "type": "local",
-      "command": ["node", "F:\\generate_image\\dist\\index.js"],
+      "command": ["npx", "-y", "@genoooool/mcp-image-generator"],
       "enabled": true,
       "environment": {
         "IMAGE_PROVIDER": "gemini_official",
         "IMAGE_API_KEY": "your_gemini_api_key",
-        "IMAGE_OUT_DIR": "F:\\images"
-      }
-    },
-    "image-generator-custom": {
-      "type": "local",
-      "command": ["node", "F:\\generate_image\\dist\\index.js"],
-      "enabled": true,
-      "environment": {
-        "IMAGE_PROVIDER": "custom_gemini",
-        "IMAGE_BASE_URL": "https://your-custom-provider.com",
-        "IMAGE_API_KEY": "your_api_key",
-        "IMAGE_AUTH_TYPE": "apikey",
-        "IMAGE_OUT_DIR": "F:\\images"
+        "IMAGE_OUT_DIR": "./images"
       }
     }
   }
 }
 ```
-
-### Enabling/Disabling MCP Servers
-
-You can temporarily disable an MCP server by setting `enabled: false` in your configuration:
-
-```jsonc
-{
-  "$schema": "https://opencode.ai/config.json",
-  "mcp": {
-    "image-generator": {
-      "type": "local",
-      "command": ["node", "F:\\generate_image\\dist\\index.js"],
-      "enabled": false,  // Disabled - can be re-enabled by changing to true
-      "environment": {
-        "IMAGE_PROVIDER": "yunwu",
-        "IMAGE_TOKEN": "your_token"
-      }
-    }
-  }
-}
-```
-
-### NPX One-Line Distribution
-
-For quick installation without cloning the repository, you can use npx directly:
-
-**Note**: This distribution method is not yet published to npm. To enable this feature, you would need to:
-
-1. Publish the package to npm registry
-2. Configure OpenCode to use npx with the published package name
-
-Example (when published):
-
-```jsonc
-{
-  "$schema": "https://opencode.ai/config.json",
-  "mcp": {
-    "image-generator": {
-      "type": "local",
-      "command": ["npx", "-y", "mcp-image-generator"],
-      "enabled": true,
-      "environment": {
-        "IMAGE_PROVIDER": "yunwu",
-        "IMAGE_TOKEN": "your_token"
-      }
-    }
-  }
-}
-```
-
-**Current workaround**: For now, use the local installation method described above.
 
 ## Tool Usage
 
@@ -213,7 +270,7 @@ Generate an image using AI models.
 }
 ```
 
-**Note**: For Yunwu provider, if the response does not include a URL field, only `file_path` will be returned and `url` will be empty. The raw response will be logged to stderr for debugging.
+**Note**: For Yunwu provider, if the response does not include a URL field, only `file_path` will be returned and `url` will be empty.
 
 ## Example Usage
 
@@ -232,7 +289,7 @@ Generate an image using AI models.
 ```json
 {
   "url": "",
-  "file_path": "F:\\images\\20260111_034500.png",
+  "file_path": "./images/20260111_034500.png",
   "provider": "yunwu"
 }
 ```
@@ -245,7 +302,7 @@ Generate an image using AI models.
   "prompt": "A futuristic cityscape at night",
   "model": "gemini-3-pro-image-preview",
   "aspect_ratio": "1:1",
-  "out_dir": "F:\\my_images",
+  "out_dir": "./my_images",
   "filename": "cityscape.png"
 }
 ```
@@ -254,7 +311,7 @@ Generate an image using AI models.
 ```json
 {
   "url": "",
-  "file_path": "F:\\my_images\\cityscape.png",
+  "file_path": "./my_images/cityscape.png",
   "provider": "gemini_official"
 }
 ```
@@ -315,7 +372,6 @@ Then send JSON-RPC messages via stdin.
   - If response contains `fileData.uri`, returns the URL in `url` field
   - If response contains `inlineData.data`, decodes base64 and saves to local file
   - If no URL is available, `url` will be empty and only `file_path` is guaranteed
-  - Raw response is logged to stderr for debugging
 
 ### Gemini Official Provider
 
@@ -362,6 +418,22 @@ Increase the timeout by setting `IMAGE_REQUEST_TIMEOUT`:
 export IMAGE_REQUEST_TIMEOUT=120000  # 120 seconds
 ```
 
+### Claude Code doesn't show the MCP server
+1. Make sure you've restarted Claude Code after editing the config file
+2. Check that the configuration file path is correct for your OS
+3. Verify the command works in your terminal (e.g., run `npx -y @genoooool/mcp-image-generator`)
+4. Check Claude Code logs for error messages
+
 ## License
 
 MIT
+
+## Author
+
+genoooool
+
+## Links
+
+- [npm package](https://www.npmjs.com/package/@genoooool/mcp-image-generator)
+- [GitHub repository](https://github.com/genoooool/mcp-image-generator)
+- [Issues](https://github.com/genoooool/mcp-image-generator/issues)
