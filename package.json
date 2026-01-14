@@ -1,0 +1,52 @@
+{
+  "name": "mcp-image-generator",
+  "version": "1.0.0",
+  "description": "MCP Server for image generation with multi-provider support (Yunwu, Gemini Official, Custom)",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "mcp-image-generator": "dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "tsx src/index.ts",
+    "dev": "tsx watch src/index.ts"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "image-generation",
+    "gemini",
+    "ai",
+    "yunwu",
+    "openai",
+    "image",
+    "generator"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/mcp-image-generator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/mcp-image-generator/issues"
+  },
+  "homepage": "https://github.com/yourusername/mcp-image-generator#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "axios": "^1.7.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}

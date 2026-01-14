@@ -1,0 +1,120 @@
+# OpenCode MCP Configuration Examples
+
+This file contains examples for configuring the MCP Image Generator in OpenCode.
+
+## Local Installation Configuration
+
+### Yunwu Provider
+
+```jsonc
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "image-generator-yunwu": {
+      "type": "local",
+      "command": ["node", "F:\\generate_image\\dist\\index.js"],
+      "enabled": true,
+      "environment": {
+        "IMAGE_PROVIDER": "yunwu",
+        "IMAGE_TOKEN": "your_yunwu_token_here",
+        "IMAGE_OUT_DIR": "F:\\images"
+      }
+    }
+  }
+}
+```
+
+### Gemini Official Provider
+
+```jsonc
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "image-generator-gemini": {
+      "type": "local",
+      "command": ["node", "F:\\generate_image\\dist\\index.js"],
+      "enabled": true,
+      "environment": {
+        "IMAGE_PROVIDER": "gemini_official",
+        "IMAGE_API_KEY": "your_gemini_api_key_here",
+        "IMAGE_OUT_DIR": "F:\\images"
+      }
+    }
+  }
+}
+```
+
+### Custom Gemini Provider
+
+```jsonc
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "image-generator-custom": {
+      "type": "local",
+      "command": ["node", "F:\\generate_image\\dist\\index.js"],
+      "enabled": true,
+      "environment": {
+        "IMAGE_PROVIDER": "custom_gemini",
+        "IMAGE_BASE_URL": "https://your-custom-provider.com",
+        "IMAGE_API_KEY": "your_custom_api_key_here",
+        "IMAGE_AUTH_TYPE": "apikey",
+        "IMAGE_OUT_DIR": "F:\\images"
+      }
+    }
+  }
+}
+```
+
+## NPX Distribution Configuration (When Published)
+
+**Note**: This feature is not yet available as the package has not been published to npm. This example is provided for future reference.
+
+```jsonc
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "image-generator": {
+      "type": "local",
+      "command": ["npx", "-y", "mcp-image-generator"],
+      "enabled": true,
+      "environment": {
+        "IMAGE_PROVIDER": "yunwu",
+        "IMAGE_TOKEN": "your_token_here",
+        "IMAGE_OUT_DIR": "F:\\images"
+      }
+    }
+  }
+}
+```
+
+## Disabling an MCP Server
+
+To temporarily disable an MCP server without removing it from configuration:
+
+```jsonc
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "image-generator": {
+      "type": "local",
+      "command": ["node", "F:\\generate_image\\dist\\index.js"],
+      "enabled": false,  // Disabled - change to true to re-enable
+      "environment": {
+        "IMAGE_PROVIDER": "yunwu",
+        "IMAGE_TOKEN": "your_token"
+      }
+    }
+  }
+}
+```
+
+## Configuration File Locations
+
+OpenCode loads configuration from the following locations (in precedence order):
+
+1. **Global config**: `~/.config/opencode/opencode.json` (or `~/.opencode/config.json`)
+2. **Custom config**: `OPENCODE_CONFIG` environment variable
+3. **Project config**: `opencode.json` in project root
+
+For detailed information on configuration format and options, see the [OpenCode Config documentation](https://opencode.ai/docs/config/).
