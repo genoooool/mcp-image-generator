@@ -27,7 +27,7 @@ const server = new Server(
 const GenerateImageInputSchema = z.object({
   model: z.string().default('gemini-3-pro-image-preview').optional(),
   prompt: z.string().describe('The prompt for image generation'),
-  aspect_ratio: z.enum(['1:1', '16:9', '9:16', '4:3', '3:4']).default('1:1').optional(),
+  aspect_ratio: z.enum(['1:1', '16:9', '9:16', '4:3', '3:4', '3:2', '2:3', '5:4', '4:5', '21:9']).default('1:1').optional(),
   image_size: z.enum(['1K', '2K', '4K']).default('2K').optional(),
   out_dir: z.string().optional().describe('Directory to save the image (optional)'),
   filename: z.string().optional().describe('Custom filename (optional, default: timestamp.png)')
@@ -53,7 +53,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
             },
             aspect_ratio: {
               type: 'string',
-              enum: ['1:1', '16:9', '9:16', '4:3', '3:4'],
+              enum: ['1:1', '16:9', '9:16', '4:3', '3:4', '3:2', '2:3', '5:4', '4:5', '21:9'],
               description: 'Aspect ratio of the generated image (default: 1:1)'
             },
             image_size: {
