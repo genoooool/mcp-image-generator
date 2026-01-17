@@ -8,7 +8,7 @@
 - **Environment variable configuration**: All provider settings controlled via environment variables
 - **Flexible output**: Save images to custom directories with custom filenames
 - **Multiple aspect ratios**: Support for 1:1, 16:9, 9:16, 4:3, 3:4
-- **Quality control**: Standard and high quality options
+- **Resolution control**: 1K, 2K, 4K resolution options (default: 2K)
 - **Error handling**: Comprehensive error messages with HTTP status codes and response details
 - **Timeout support**: Configurable request timeout (default: 60s)
 
@@ -402,7 +402,7 @@ Generate an image using AI models.
 | `model` | string | No | `gemini-3-pro-image-preview` | Model to use for generation |
 | `prompt` | string | Yes | - | The prompt for image generation |
 | `aspect_ratio` | string | No | `1:1` | Aspect ratio: `1:1`, `16:9`, `9:16`, `4:3`, `3:4` |
-| `quality` | string | No | `standard` | Quality: `standard` or `high` |
+| `image_size` | string | No | `2K` | Resolution: `1K`, `2K`, `4K` |
 | `out_dir` | string | No | `./output` | Directory to save the image |
 | `filename` | string | No | `timestamp.png` | Custom filename |
 
@@ -427,7 +427,7 @@ Generate an image using AI models.
 {
   "prompt": "A beautiful sunset over the ocean",
   "aspect_ratio": "16:9",
-  "quality": "high"
+  "image_size": "2K"
 }
 ```
 
@@ -469,7 +469,7 @@ Generate an image using AI models.
 {
   "prompt": "A peaceful mountain landscape",
   "aspect_ratio": "4:3",
-  "quality": "standard"
+  "image_size": "1K"
 }
 ```
 

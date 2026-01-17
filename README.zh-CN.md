@@ -8,7 +8,7 @@
 - **环境变量配置**：所有Provider设置都通过环境变量控制
 - **灵活输出**：可将图片保存到自定义目录并指定文件名
 - **多种宽高比**：支持 1:1、16:9、9:16、4:3、3:4
-- **质量控制**：支持标准和高质量选项
+- **分辨率控制**：支持 1K、2K、4K 分辨率选项（默认：2K）
 - **错误处理**：包含HTTP状态码和响应详情的完整错误信息
 - **超时支持**：可配置的请求超时时间（默认60秒）
 
@@ -402,7 +402,7 @@ IMAGE_OUT_DIR = "./images"
 | `model` | string | 否 | `gemini-3-pro-image-preview` | 用于生成的模型 |
 | `prompt` | string | 是 | - | 图片生成的提示词 |
 | `aspect_ratio` | string | 否 | `1:1` | 宽高比：`1:1`、`16:9`、`9:16`、`4:3`、`3:4` |
-| `quality` | string | 否 | `standard` | 质量：`standard` 或 `high` |
+| `image_size` | string | 否 | `2K` | 分辨率：`1K`、`2K`、`4K` |
 | `out_dir` | string | 否 | `./output` | 保存图片的目录 |
 | `filename` | string | 否 | `timestamp.png` | 自定义文件名 |
 
@@ -427,7 +427,7 @@ IMAGE_OUT_DIR = "./images"
 {
   "prompt": "大海上的美丽日落",
   "aspect_ratio": "16:9",
-  "quality": "high"
+  "image_size": "2K"
 }
 ```
 
@@ -469,7 +469,7 @@ IMAGE_OUT_DIR = "./images"
 {
   "prompt": "宁静的山地景观",
   "aspect_ratio": "4:3",
-  "quality": "standard"
+  "image_size": "1K"
 }
 ```
 
