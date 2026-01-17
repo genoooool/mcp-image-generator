@@ -2,7 +2,7 @@ export interface ImageGenerationConfig {
   model: string;
   prompt: string;
   aspectRatio: string;
-  quality: string;
+  imageSize: string;
 }
 
 export interface ImageGenerationResult {

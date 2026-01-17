@@ -15,8 +15,10 @@
 ## 支持的MCP客户端
 
 此MCP服务器可用于：
-- **Claude Code** (Claude Desktop)
+- **Claude Desktop**
+- **Claude Code CLI**
 - **OpenCode**
+- **Codex**
 - 任何兼容MCP的客户端
 
 ## 安装
@@ -100,14 +102,116 @@ export IMAGE_OUT_DIR=./images  # 可选
 
 ## MCP客户端配置
 
-### Claude Code (Claude Desktop)
+### Claude Desktop
 
 #### 配置文件位置
 
-Claude Code从以下位置加载MCP配置：
+Claude Desktop从以下位置加载MCP配置：
 - **Windows**：`%APPDATA%\Claude\claude_desktop_config.json`
 - **macOS**：`~/Library/Application Support/Claude/claude_desktop_config.json`
 - **Linux**：`~/.config/Claude/claude_desktop_config.json`
+
+#### 配置格式
+
+将MCP服务器添加到配置文件：
+
+```jsonc
+{
+  "mcpServers": {
+    "image-generator-yunwu": {
+      "command": "npx",
+      "args": ["-y", "@genoooool/mcp-image-generator"],
+      "env": {
+        "IMAGE_PROVIDER": "yunwu",
+        "IMAGE_TOKEN": "your_yunwu_token",
+        "IMAGE_OUT_DIR": "./images"
+      }
+    },
+    "image-generator-gemini": {
+      "command": "npx",
+      "args": ["-y", "@genoooool/mcp-image-generator"],
+      "env": {
+        "IMAGE_PROVIDER": "gemini_official",
+        "IMAGE_API_KEY": "your_gemini_api_key",
+        "IMAGE_OUT_DIR": "./images"
+      }
+    },
+    "image-generator-custom": {
+      "command": "npx",
+      "args": ["-y", "@genoooool/mcp-image-generator"],
+      "env": {
+        "IMAGE_PROVIDER": "custom_gemini",
+        "IMAGE_BASE_URL": "https://your-custom-provider.com",
+        "IMAGE_API_KEY": "your_api_key",
+        "IMAGE_AUTH_TYPE": "apikey",
+        "IMAGE_OUT_DIR": "./images"
+      }
+    }
+  }
+}
+```
+
+#### 使用全局安装
+
+如果你已全局安装：
+
+```jsonc
+{
+  "mcpServers": {
+    "image-generator": {
+      "command": "mcp-image-generator",
+      "env": {
+        "IMAGE_PROVIDER": "yunwu",
+        "IMAGE_TOKEN": "your_token"
+      }
+    }
+  }
+}
+```
+
+#### 使用本地安装
+
+如果你克隆了仓库：
+
+**Windows**：
+```jsonc
+{
+  "mcpServers": {
+    "image-generator": {
+      "command": "node",
+      "args": ["C:\\path\\to\\project\\dist\\index.js"],
+      "env": {
+        "IMAGE_PROVIDER": "yunwu",
+        "IMAGE_TOKEN": "your_token"
+      }
+    }
+  }
+}
+```
+
+**macOS/Linux**：
+```jsonc
+{
+  "mcpServers": {
+    "image-generator": {
+      "command": "node",
+      "args": ["/path/to/project/dist/index.js"],
+      "env": {
+        "IMAGE_PROVIDER": "yunwu",
+        "IMAGE_TOKEN": "your_token"
+      }
+    }
+  }
+}
+```
+
+### Claude Code CLI
+
+#### 配置文件位置
+
+Claude Code CLI从以下位置加载MCP配置：
+- **Windows**：`%USERPROFILE%\.claude\config.json`
+- **macOS/Linux**：`~/.claude/config.json`
 
 #### 配置格式
 

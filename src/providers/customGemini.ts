@@ -42,7 +42,8 @@ export class CustomGeminiProvider implements ImageProvider {
       generationConfig: {
         responseModalities: ['image'],
         imageConfig: {
-          aspectRatio: config.aspectRatio
+          aspectRatio: config.aspectRatio,
+          imageSize: config.imageSize
         }
       }
     };
