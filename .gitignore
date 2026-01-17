@@ -62,6 +62,7 @@ coverage/
 云雾api文档.md
 npm发布.md
 AGENTS.md
+claude.md
 *.tmp
 *.temp
 

@@ -15,8 +15,10 @@
 ## Supported MCP Clients
 
 This MCP server works with:
-- **Claude Code** (Claude Desktop)
+- **Claude Desktop**
+- **Claude Code CLI**
 - **OpenCode**
+- **Codex**
 - Any MCP-compatible client
 
 ## Installation
@@ -100,14 +102,116 @@ export IMAGE_OUT_DIR=./images  # Optional
 
 ## MCP Client Configuration
 
-### Claude Code (Claude Desktop)
+### Claude Desktop
 
 #### Configuration File Location
 
-Claude Code loads MCP configuration from:
+Claude Desktop loads MCP configuration from:
 - **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
 - **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
 - **Linux**: `~/.config/Claude/claude_desktop_config.json`
+
+#### Configuration Format
+
+Add the MCP server to your configuration file:
+
+```jsonc
+{
+  "mcpServers": {
+    "image-generator-yunwu": {
+      "command": "npx",
+      "args": ["-y", "@genoooool/mcp-image-generator"],
+      "env": {
+        "IMAGE_PROVIDER": "yunwu",
+        "IMAGE_TOKEN": "your_yunwu_token",
+        "IMAGE_OUT_DIR": "./images"
+      }
+    },
+    "image-generator-gemini": {
+      "command": "npx",
+      "args": ["-y", "@genoooool/mcp-image-generator"],
+      "env": {
+        "IMAGE_PROVIDER": "gemini_official",
+        "IMAGE_API_KEY": "your_gemini_api_key",
+        "IMAGE_OUT_DIR": "./images"
+      }
+    },
+    "image-generator-custom": {
+      "command": "npx",
+      "args": ["-y", "@genoooool/mcp-image-generator"],
+      "env": {
+        "IMAGE_PROVIDER": "custom_gemini",
+        "IMAGE_BASE_URL": "https://your-custom-provider.com",
+        "IMAGE_API_KEY": "your_api_key",
+        "IMAGE_AUTH_TYPE": "apikey",
+        "IMAGE_OUT_DIR": "./images"
+      }
+    }
+  }
+}
+```
+
+#### Using Global Installation
+
+If you installed globally:
+
+```jsonc
+{
+  "mcpServers": {
+    "image-generator": {
+      "command": "mcp-image-generator",
+      "env": {
+        "IMAGE_PROVIDER": "yunwu",
+        "IMAGE_TOKEN": "your_token"
+      }
+    }
+  }
+}
+```
+
+#### Using Local Installation
+
+If you cloned the repository:
+
+**Windows**:
+```jsonc
+{
+  "mcpServers": {
+    "image-generator": {
+      "command": "node",
+      "args": ["C:\\path\\to\\project\\dist\\index.js"],
+      "env": {
+        "IMAGE_PROVIDER": "yunwu",
+        "IMAGE_TOKEN": "your_token"
+      }
+    }
+  }
+}
+```
+
+**macOS/Linux**:
+```jsonc
+{
+  "mcpServers": {
+    "image-generator": {
+      "command": "node",
+      "args": ["/path/to/project/dist/index.js"],
+      "env": {
+        "IMAGE_PROVIDER": "yunwu",
+        "IMAGE_TOKEN": "your_token"
+      }
+    }
+  }
+}
+```
+
+### Claude Code CLI
+
+#### Configuration File Location
+
+Claude Code CLI loads MCP configuration from:
+- **Windows**: `%USERPROFILE%\.claude\config.json`
+- **macOS/Linux**: `~/.claude/config.json`
 
 #### Configuration Format
 
