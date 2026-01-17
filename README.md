@@ -7,7 +7,7 @@
 - **Multi-provider support**: Switch between Yunwu, Gemini Official, and custom Gemini providers without changing code
 - **Environment variable configuration**: All provider settings controlled via environment variables
 - **Flexible output**: Save images to custom directories with custom filenames
-- **Multiple aspect ratios**: Support for 1:1, 16:9, 9:16, 4:3, 3:4
+- **Multiple aspect ratios**: Support for 1:1, 16:9, 9:16, 4:3, 3:4, 3:2, 2:3, 5:4, 4:5, 21:9
 - **Resolution control**: 1K, 2K, 4K resolution options (default: 2K)
 - **Error handling**: Comprehensive error messages with HTTP status codes and response details
 - **Timeout support**: Configurable request timeout (default: 60s)
@@ -401,7 +401,7 @@ Generate an image using AI models.
 |-----------|------|----------|---------|-------------|
 | `model` | string | No | `gemini-3-pro-image-preview` | Model to use for generation |
 | `prompt` | string | Yes | - | The prompt for image generation |
-| `aspect_ratio` | string | No | `1:1` | Aspect ratio: `1:1`, `16:9`, `9:16`, `4:3`, `3:4` |
+| `aspect_ratio` | string | No | `1:1` | Aspect ratio: `1:1`, `16:9`, `9:16`, `4:3`, `3:4`, `3:2`, `2:3`, `5:4`, `4:5`, `21:9` |
 | `image_size` | string | No | `2K` | Resolution: `1K`, `2K`, `4K` |
 | `out_dir` | string | No | `./output` | Directory to save the image |
 | `filename` | string | No | `timestamp.png` | Custom filename |
